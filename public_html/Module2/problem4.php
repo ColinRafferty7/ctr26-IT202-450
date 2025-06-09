@@ -45,8 +45,40 @@ function transformText($arr, $arrayNumber) {
         // Step 8: Use the length function to determine the size of the string
         // Step 9: Create a substring using half of the length value and plus 3
         // Step 10: If the total length of the string is less than half the length plus 3, set the output to "Not enough characters"
-
         
+        // Challenge 1
+        $text = implode(array_map(function($char) 
+        { 
+            $dict = "abcdefghijklmnopqrstuvwxyz1234567890 ";
+            return str_contains($dict, (string) $char) ? $char : " "; 
+        }, str_split(strtolower($text))));
+
+
+        // Challenge 3
+        while (str_contains($text, "  "))
+        {
+            $text = str_replace("  ", " ", $text);
+        }
+        $text = trim($text);
+
+        // Challenge 2
+        $text = explode(" ", $text);
+        foreach ($text as $tindex => $word)
+        {
+            if ($tindex > 0)
+            {
+                $text[$tindex] = strtoupper(substr($word, 0, 1)) . substr($word, 1);
+            }
+            $text[$tindex] = $text[$tindex] . " ";
+        }
+        $text = implode($text);
+        $text = trim($text);
+
+        // Challenge 4
+        $middle = (strlen($text) / 2);
+        $placeholderForMiddleCharacters = ($middle + 3 <= strlen($text)) ? substr($text, $middle, 3) : "Not enough characters";
+
+        $placeholderForModifiedPhrase = $text;
 
         // End Solution Edits
         echo "<div>";
