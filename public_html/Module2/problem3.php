@@ -25,6 +25,13 @@ function bePositive($arr, $arrayNumber)
     $output = array_fill(0, count($arr), null); // Initialize output array
     // Start Solution Edits
 
+    // ctr26 06-09-2025
+
+    // Step 1: Use foreach loop to iterate through the values of the arrays
+    // Step 2: Create new double variable to store the number values of each index
+    // Step 3: Use an if statement to test if each value is negative and set negative numbers to positive
+    // Step 4: Use the original array values to determine the type that each value should be set to in the output
+    // Step 5: Use switch/case to set each value accordingly
 
     // End Solution Edits
     echo "<span>Output: </span>";
