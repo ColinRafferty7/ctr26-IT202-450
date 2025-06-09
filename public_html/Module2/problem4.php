@@ -33,7 +33,18 @@ function transformText($arr, $arrayNumber) {
     foreach ($arr as $index => $text) {
         // Start Solution Edits
 
-        // ctr26
+        // ctr26 06-09-2025
+
+        // Step 1: Create a dictionary that stores all charaters that should be kept
+        // Step 2: Use a foreach loop to iterate through each value of the string set to lower case
+        // Step 3: Use the contains function to check if the dictionary contains the each character and remove any that don't
+        // Step 4: Use the trim function to remove leading/trailing white space
+        // Step 5: Use a while loop to test if the string contains "  " and use the replace function if it does
+        // Step 6: Create a new string array that contains the original string split by spaces
+        // Step 7: Use a foreach loop to iterate through the array and set the first character of every string to capital except the first
+        // Step 8: Use the length function to determine the size of the string
+        // Step 9: Create a substring using half of the length value and plus 3
+        // Step 10: If the total length of the string is less than half the length plus 3, set the output to "Not enough characters"
 
         
 
