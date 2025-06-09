@@ -29,6 +29,14 @@ function printOdds($arr, $arrayNumber)
     // Step 2: Use an if statement to check if the values are odd
     // Step 3: Echo only the values that pass through the if statement
 
+    foreach ($arr as $num)
+    {
+        if ($num % 2 == 1)
+        {
+            echo "$num,";
+        }
+    }
+
     // End Solution Edits
     echo "<br>______________________________________<br>";
 }
