@@ -23,6 +23,11 @@ function printOdds($arr, $arrayNumber)
     echo "Output Array: ";
     // Start Solution Edits
 
+    // ctr26 06-09-2025
+
+    // Step 1: Use a for each loop to iterate through the values of each array
+    // Step 2: Use an if statement to check if the values are odd
+    // Step 3: Echo only the values that pass through the if statement
 
     // End Solution Edits
     echo "<br>______________________________________<br>";
