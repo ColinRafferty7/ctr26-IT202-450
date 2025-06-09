@@ -33,6 +33,26 @@ function bePositive($arr, $arrayNumber)
     // Step 4: Use the original array values to determine the type that each value should be set to in the output
     // Step 5: Use switch/case to set each value accordingly
 
+    foreach ($arr as $index => $val)
+    {
+        $num = (double) abs($val);
+        switch (gettype($val)) 
+        {
+            case "integer":
+                $num = (integer) $num;
+                break;
+            case "double":
+                break;
+            case "float":
+                $num = (float) $num;
+                break;
+            case "string":
+                $num = (string) $num;
+                break;
+        }
+        $output[$index] = $num;
+    }
+
     // End Solution Edits
     echo "<span>Output: </span>";
     printOutputWithType($output);
