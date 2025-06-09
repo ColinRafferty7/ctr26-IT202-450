@@ -2,7 +2,7 @@
 
 require_once "base.php";
 
-$ucid = "mt85"; // <-- set your ucid
+$ucid = "ctr26"; // <-- set your ucid
 
 // Don't edit the arrays below, they are used to test your code
 $array1 = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6];
@@ -26,13 +26,24 @@ function sumValues($arr, $arrayNumber)
 
     $total = 0;
     // Start Solution Edits
+
+    // ctr26 06-09-2025
+
+    // Step 1: Use a foreach loop to iterate through all values of the array
+    // Step 2: Add each value to $total
+    // Step 3: Use round function to set the number of decimal places to 2
+    // Step 4: Assign each value to $modifiedTotal
+
     // Solve Challenge 1 here
-
-
-
+    
+    foreach ($arr as $num)
+    {
+        $total += $num;
+    }
 
     // Solve Challenge 2 here
     $modifiedTotal = "?";
+    $modifiedTotal = number_format($total, 2);
 
     // End Solution Edits
     echo "<p>Total Raw Value: {$total}</p>";
