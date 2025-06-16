@@ -100,4 +100,56 @@ Requirements:
 
 <style>
     /* You're free to make whatever edits you need here, just don't override anything in the styles.css */
+
+    /*
+    ctr26 06-16-2025
+
+    Step 1: Change the position of the header to be fixed and adjust the width
+    Step 2: Adjust the margins for the content to be at the correct height
+    Step 3: Change width and height of sidebars to match their respective side
+    Step 4: Change width of content to fit between sidebars
+    Step 5: 
+    */
+
+    html
+    {
+        height: 100%;
+    }
+    header
+    {
+        position: fixed;
+        width: 100%;
+        top: 7%;
+    }
+    nav
+    {
+        position: fixed;
+        width: 100%;
+        top: 0;
+    }
+    #left-sidebar
+    {
+        position: fixed;
+        width: 15%;
+        height: 100%;
+        top: 10%;
+    }
+    #right-sidebar
+    {
+        position: fixed;
+        width: 15%;
+        height: 100%;
+        top: 10%;
+        left: 85%;
+    }
+    main
+    {
+        position: absolute;
+        top: 10%;
+        height: 90%;
+        width: 70%;
+        left: 15%;
+        overflow-y: auto;
+    }
+
 </style>
