@@ -96,6 +96,57 @@ Requirements:
 
 <script>
     /* Solve the button logic here by finding and attaching an appropriate event listener and logic*/
+
+    const leftSidebar = document.getElementById("left-sidebar");
+    const rightSidebar = document.getElementById("right-sidebar");
+    const leftButton = leftSidebar.querySelector("button");
+    const rightButton = rightSidebar.querySelector("button");
+    const cont = document.querySelector(".content");
+
+    let leftExpand = true;
+    let rightExpand = true;
+
+    leftButton.style.position = "fixed"; 
+    leftButton.style.left = "0%";
+    rightButton.style.position = "fixed";
+    rightButton.style.left = "85%"
+    cont.style.zIndex = "-1";
+    cont.style.width = "70%";
+
+    leftButton.addEventListener("click", () => {
+        if (leftExpand)
+        {
+            leftSidebar.style.left = "-15%";
+            cont.style.left = "0%";
+            let w = parseFloat(cont.style.width) || 0;
+            cont.style.width = (w + 15) + "%";
+        }
+        else 
+        {
+            leftSidebar.style.left = "0%";
+            cont.style.left = "15%";
+            cont.style.width = (parseFloat(cont.style.width) - 15) + "%";
+        }
+        leftExpand = !leftExpand;
+    });
+
+    rightButton.addEventListener("click", () => {
+        if (rightExpand)
+        {
+            rightSidebar.style.left = "100%";
+            rightButton.style.left = "98.5%";
+            let w = parseFloat(cont.style.width) || 0;
+            cont.style.width = (w + 15) + "%";
+        }
+        else 
+        {
+            rightSidebar.style.left = "85%";
+            rightButton.style.left = "85%";
+            cont.style.width = (parseFloat(cont.style.width) - 15) + "%";
+        }
+        rightExpand = !rightExpand;
+    });
+
 </script>
 
 <style>
