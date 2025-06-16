@@ -55,6 +55,50 @@ Requirements:
 
 <script>
     /* Solve the button logic here by finding and attaching an appropriate event listener and logic*/
+
+    /*
+    ctr26 06-16-2025
+
+    Step 1: Add event listeners to both buttons
+    Step 2: Use indexing for each panel item to cycle them in order
+    Step 3: When the index goes above 5 or below 1, switch to the opposite end
+    */
+   
+    const buttons = document.querySelectorAll("nav button");
+    const prevButton = buttons[0];
+    const nextButton = buttons[1];
+
+    const panels = document.querySelectorAll(".carousel .panel");
+
+    let currentPanel = 0;
+    
+    panels.forEach(function(panel, i) {
+        if (i != currentPanel)
+        {
+            panel.style.display = "none";
+        }
+    });
+
+    prevButton.addEventListener("click", () => {
+        panels[currentPanel].style.display = "none"
+        currentPanel = currentPanel - 1;
+        if (currentPanel < 0)
+        {
+            currentPanel = 4;
+        }
+        panels[currentPanel].style.display = "block";
+    });
+
+    nextButton.addEventListener("click", () => {
+        panels[currentPanel].style.display = "none"
+        currentPanel = currentPanel + 1;
+        if (currentPanel > 4)
+        {
+            currentPanel = 0;
+        }
+        panels[currentPanel].style.display = "block";
+    });
+
 </script>
 
 <style>
@@ -71,6 +115,7 @@ Requirements:
     .carousel
     {
         text-align: center;
+        display:
     }
     nav
     {
