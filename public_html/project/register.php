@@ -23,5 +23,12 @@
     }
 </script>
 <?php
- //TODO 2: add PHP Code
+//TODO 2: add PHP Code
+if (isset($_POST["email"], $_POST["password"], $_POST["confirm"])) {
+
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $confirm = $_POST["confirm"];
+    // TODO 3: validate/use
+}
 ?>
