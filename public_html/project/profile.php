@@ -148,6 +148,8 @@ if (isset($_POST["currentPassword"], $_POST["newPassword"], $_POST["confirmPassw
 }
 ?>
 <h3>Profile</h3>
+<!-- ctr26 07/10/2025 -->
+<!-- Runs the validate function in order to verify form data -->
 <form method="POST" onsubmit="return validate(this);">
     <div class="mb-3">
         <label for="email">Email</label>
@@ -180,6 +182,14 @@ if (isset($_POST["currentPassword"], $_POST["newPassword"], $_POST["confirmPassw
         let con = form.confirmPassword.value;
         let isValid = true;
         //TODO add other client side validation....
+
+        // ctr26 07/10/2025
+        // Only checks if the password is valid because later the confirm is compared to this
+        if (!is_valid_password(pw))
+        {
+            flash("Please enter a valid password", "warning");
+            isValid = false;
+        }
 
         //example of using flash via javascript
         //find the flash container, create a new element, appendChild
