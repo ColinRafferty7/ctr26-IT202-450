@@ -2,6 +2,8 @@
 require(__DIR__ . "/../../partials/nav.php");
 ?>
 <h3>Register</h3>
+<!-- ctr26 07/10/2025 -->
+<!-- When the form is submitted, it uses the validate function from the js script to verify the email -->
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
@@ -25,8 +27,29 @@ require(__DIR__ . "/../../partials/nav.php");
     function validate(form) {
         //TODO 1: implement JavaScript validation (you'll do this on your own towards the end of Milestone1)
         //ensure it returns false for an error and true for success
+let valid = true;
+        if (!is_valid_password(pw))
+        {
+            flash("Password must be at least 8 characters", "warning");
+            valid = false;
+        }
+        if (!is_valid_email(email))
+        {
+            flash("Please enter a valid email", "warning");
+            valid = false;
+        }
+        if (!is_valid_username(username))
+        {
+            flash("Please enter a valid username", "warning");
+            valid = false;
+        }
+        if (!is_valid_confirm(pw, confirm))
+        {
+            flash("Confirm does not match the entered password", "warning");
+            valid = false;
+        }
 
-        return true;
+        return valid;
     }
 </script>
 <?php
