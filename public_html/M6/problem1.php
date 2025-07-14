@@ -32,6 +32,18 @@ function processBirds($birds) {
     // For each member of birds, add a new array variable into the subset array
     // Iterate through the contents of each member of birds and use the keys to identify desired data
     // Copy only desired keys value pairs into the subset array
+
+    foreach ($birds as $index => $bird)
+    {
+        $subset[$index] = [];
+        foreach ($bird as $key => $value)
+        {
+            if ($key == "name" || $key == "color" || $key == "region")
+            {
+                $subset[$index][$key] = $value;
+            }        
+        }
+    }
     
     // End edits
     echo "<pre>" . var_export($subset, true) . "</pre>";
