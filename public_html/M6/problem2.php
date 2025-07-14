@@ -30,6 +30,24 @@ function processCars($cars) {
     $processedCars = []; // result array
     $classic_age = 25; // don't change this value
     // Start edits
+    // ctr26 07/13/2025
+    // Set the current year to 2025
+    // For each member of cars, add a new array into processed cars
+    // Use an indexed for each loop to add each key value pair into the new array
+    // Use the newly added data to get the current age of the car and set the classic variable
+
+    $currentYear = 2025;
+
+    foreach ($cars as $index => $car)
+    {
+        $processedCars[$index] = [];
+        foreach ($car as $key => $value)
+        {
+            $processedCars[$index][$key] = $value;
+        }
+        $processedCars[$index]["age"] = ($currentYear - $processedCars[$index]["year"]);
+        $processedCars[$index]["isClassic"] = ($processedCars[$index]["age"] >= 25);
+    }
    
     // End edits
     echo "<pre>" . var_export($processedCars, true) . "</pre>";
