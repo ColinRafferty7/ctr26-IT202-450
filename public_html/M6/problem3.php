@@ -56,6 +56,25 @@ function joinArrays($users, $activities) {
     // Do the same thing for the second array, but skip the userId since its already in the first array
     // iterate through the values of the activity key and add it to a new array
 
+    foreach ($users as $index => $user)
+    {
+        $joined[$index] = [];
+        foreach ($user as $key => $value)
+        {
+            $joined[$index][$key] = $value;
+        }
+        foreach ($activities[$index] as $key => $value)
+        {
+            if ($key != "userId")
+            {
+                if ($key == "activity")
+                {
+                    $joined[$index][$key] = [$value];
+                }
+            }
+        }
+    }
+
     // End edits
     echo "<pre>" . var_export($joined, true) . "</pre>";
 }
