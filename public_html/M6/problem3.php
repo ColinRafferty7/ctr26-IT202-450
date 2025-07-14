@@ -50,13 +50,17 @@ function joinArrays($users, $activities) {
     // TODO Objective: Add logic to join both arrays on the userId property into one $joined array
     $joined = []; // result array
     // Start edits
-    
+    // ctr26 07/13/2025
+    // For each member of the 2 arrays, add a new array into joined
+    // Iterate through each member of the first array and add each key value pair 
+    // Do the same thing for the second array, but skip the userId since its already in the first array
+    // iterate through the values of the activity key and add it to a new array
 
     // End edits
     echo "<pre>" . var_export($joined, true) . "</pre>";
 }
 
-$ucid = "mt85"; // replace with your UCID
+$ucid = "ctr26"; // replace with your UCID
 printHeader($ucid, 3); 
 ?>
 <table>
