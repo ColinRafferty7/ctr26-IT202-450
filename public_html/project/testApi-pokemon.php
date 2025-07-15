@@ -2,12 +2,17 @@
 require(__DIR__ . "/../../partials/nav.php");
 
 $result = [];
+// ctr26 07/14/2025
+// Changed the get to be the required function paramater
 if (isset($_GET["name"])) {
     //function=GLOBAL_QUOTE&symbol=MSFT&datatype=json
+    // Changed the data to contain the necessary inputs
     $data = ["name" => $_GET["name"]];
+    // Changed endpoint and host to match the ones given from my api
     $endpoint = "https://pokemon-data-api.p.rapidapi.com/api/pokemon_data";
     $isRapidAPI = true;
     $rapidAPIHost = "pokemon-data-api.p.rapidapi.com";
+    // Hooked up my own api key
     $result = get($endpoint, "POKEMON_API_KEY", $data, $isRapidAPI, $rapidAPIHost);
     //example of cached data to save the quotas, don't forget to comment out the get() if using the cached data for testing
     /* $result = ["status" => 200, "response" => '{
@@ -37,6 +42,7 @@ if (isset($_GET["name"])) {
     <p>Remember, we typically won't be frequently calling live data from our API, this is merely a quick sample. We'll want to cache data in our DB to save on API quota.</p>
     <form>
         <div>
+            <!-- Kept the input type since it still works but changed the names -->
             <label>Pokemon</label>
             <input name="name" />
             <input type="submit" value="Fetch Pokemon" />
