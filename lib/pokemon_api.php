@@ -49,7 +49,14 @@ function fetch_pokemon($pokemon)
         //["01.", "symbol"]
         if (!is_array($v))
         {
-            $transformedResult[$k] = $v;
+            if ((!is_numeric($v)) && $v != null)
+            {
+                $transformedResult[$k] = ucfirst($v);
+            }
+            else
+            {
+                $transformedResult[$k] = $v;
+            }
         }
         else 
         {
