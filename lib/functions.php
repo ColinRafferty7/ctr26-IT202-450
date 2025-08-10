@@ -21,5 +21,6 @@ require(__DIR__ . "/reset_session.php");
 require(__DIR__ . "/api_helpers.php");
 require(__DIR__ . "/pokemon_api.php");
 require(__DIR__ . "/db_helpers.php");
+require(__DIR__ . "/render_functions.php");
 
 ?>
