@@ -43,6 +43,9 @@ require(__DIR__ . "/../lib/functions.php");
                         <a class="nav-link" aria-current="page" href="<?php get_url('landing.php', true); ?>">Landing</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="<?php get_url('pokedex.php', true); ?>">Pokedex</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="<?php get_url('profile.php', true); ?>">Profile</a>
                     </li>
                 <?php endif; ?>
@@ -67,7 +70,7 @@ require(__DIR__ . "/../lib/functions.php");
                             </li>
                             <li><a class="dropdown-item" aria-current="page" href="<?php get_url('admin/assign_roles.php', true); ?>">Assign Roles</a>
                             </li>
-
+                    
                         </ul>
                     </li>
                 <?php endif; ?>

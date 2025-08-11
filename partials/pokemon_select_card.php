@@ -15,16 +15,9 @@ if (!isset($data)) {
             <div class="card-text">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Pokedex ID: <?php se($data, "pokedex_id", "N/A"); ?></li>
-                    <li class="list-group-item">Ability 1: <?php se($data, "ability_1", "N/A"); ?></li>
-                    <li class="list-group-item">Ability 2: <?php se($data, "ability_2", "N/A"); ?></li>
-                    <li class="list-group-item">Ability 3: <?php se($data, "ability_3", "N/A"); ?></li>
                     <li class="list-group-item">Type 1: <?php se($data, "type_1", "N/A"); ?></li>
                     <li class="list-group-item">Type 2: <?php se($data, "type_2", "N/A"); ?></li>
-                    <a href="<?php echo get_url("view_pokemon.php");?>?id=<?php se($data, "id"); ?>">View</a>
-                    <?php if (has_role("Admin")) : ?>
-                        <a href="<?php echo get_url("admin/edit_pokemon.php");?>?id=<?php se($data, "id"); ?>">Edit</a>
-                        <a href="<?php echo get_url("admin/delete_pokemon.php");?>?id=<?php se($data, "id"); ?>">Delete</a>
-                    <?php endif; ?>
+                    <?php render_button(["text" => "Select", "type" => "submit"]); ?>
                 </ul>
             </div>
         </div>
