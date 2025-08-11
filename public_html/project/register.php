@@ -29,22 +29,22 @@ require(__DIR__ . "/../../partials/nav.php");
         let valid = true;
         if (!is_valid_password(pw))
         {
-            flash("Password must be at least 8 characters", "warning");
+            flash("JS: Password must be at least 8 characters", "warning");
             valid = false;
         }
         if (!is_valid_email(email))
         {
-            flash("Please enter a valid email", "warning");
+            flash("JS: Please enter a valid email", "warning");
             valid = false;
         }
         if (!is_valid_username(username))
         {
-            flash("Please enter a valid username", "warning");
+            flash("JS: Please enter a valid username", "warning");
             valid = false;
         }
         if (!is_valid_confirm(pw, confirm))
         {
-            flash("Confirm does not match the entered password", "warning");
+            flash("JS: Confirm does not match the entered password", "warning");
             valid = false;
         }
 
@@ -61,36 +61,36 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
     //TODO 3
     $hasError = false;
     if (empty($email)) {
-        flash("Email must not be empty", "danger");
+        flash("PHP: Email must not be empty", "danger");
         $hasError = true;
     }
     //sanitize
     $email = sanitize_email($email);
     //validate
     if (!is_valid_email($email)) {
-        flash("Invalid email address", "danger");
+        flash("PHP: Invalid email address", "danger");
         $hasError = true;
     }
     if (!is_valid_username($username)) {
-        flash("Username must only contain 3-16 characters a-z, 0-9, _, or -", "danger");
+        flash("PHP: Username must only contain 3-16 characters a-z, 0-9, _, or -", "danger");
         $hasError = true;
     }
     if (empty($password)) {
-        flash("password must not be empty", "danger");
+        flash("PHP: password must not be empty", "danger");
         $hasError = true;
     }
     if (empty($confirm)) {
-        flash("Confirm password must not be empty", "danger");
+        flash("PHP: Confirm password must not be empty", "danger");
         $hasError = true;
     }
     if (!is_valid_password($password)) {
-        flash("Password too short", "danger");
+        flash("PHP: Password too short", "danger");
         $hasError = true;
     }
     if (
         strlen($password) > 0 && $password !== $confirm
     ) {
-        flash("Passwords must match", "danger");
+        flash("PHP: Passwords must match", "danger");
         $hasError = true;
     }
     if (!$hasError) {

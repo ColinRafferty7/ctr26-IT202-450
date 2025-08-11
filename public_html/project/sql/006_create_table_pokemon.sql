@@ -1,7 +1,7 @@
 CREATE TABLE `IT202-Pokemon` (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(50) NOT NULL,
-  `pokedex_id` INT,
+  `pokedex_id` INT NOT NULL DEFAULT 0,
   `ability_1` VARCHAR(50),
   `ability_2` VARCHAR(50),
   `ability_3` VARCHAR(50),

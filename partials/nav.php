@@ -29,10 +29,10 @@ require(__DIR__ . "/../lib/functions.php");
 <link rel="stylesheet" href="<?php get_url('styles.css', true); ?>">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 <script src="<?php get_url('helpers.js', true); ?>"></script>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-dark">
     <div class="container-fluid">
         <!-- Replace with your ucid -->
-        <a class="navbar-brand text-uppercase" href="#">ctr26</a>
+        <a class="navbar-brand text-uppercase text-secondary" href="#">ctr26</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -93,3 +93,10 @@ require(__DIR__ . "/../lib/functions.php");
         </div>
     </div>
 </nav>
+
+<style>
+    .nav-link
+    {
+        background-color: var(--bs-secondary);
+    }
+</style>
