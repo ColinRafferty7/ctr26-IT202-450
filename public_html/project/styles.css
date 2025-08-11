@@ -64,18 +64,14 @@ nav li a {
 nav li a:hover {
     color: pink;
 }
-
-nav::after {
-    text-align: center;
-    content: "(*Edit the hideous css)";
-    color:red;
-
-}
 label{
-    border:#212529 dashed 2px;
-    background-color: bisque;
+    border:#212529 5px;
+    border-radius: 6px;
+    background-color: var(--bs-secondary);
+    color: var(--bs-dark)
 }
 input {
+    background-color: var(--bs-secondary);
     border-radius: 25%;
     padding: .25rem;
 }
@@ -89,14 +85,28 @@ form,h3 {
     margin-left: auto;
     margin-right: auto;
 }
-
+.form-control
+{
+    border-color: var(--bs-dark);
+    background-color: var(--bs-secondary);
+}
+.form-select
+{
+    border-color: var(--bs-dark);
+    background-color: var(--bs-secondary);
+}
 body {
-    background-color: rgb(0, 68, 48);
-    color: rgb(255, 19, 235);
+    background-color: rgb(48, 48, 48);
+    color: var(--bs-dark);
 }
 input[type="submit"]:hover {
     transform: scale(1.15)
 }
 input[type="submit"]:active {
      transform: scale(.75)
+}
+.nav-link
+{
+    background-color: var(--bs-dark);
+    color: var(--bs-light);
 }
