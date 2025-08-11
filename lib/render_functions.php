@@ -30,3 +30,8 @@ function render_pokemon_select_card($data = array())
 {
     include(__DIR__ . "/../partials/pokemon_select_card.php");
 }
+
+function render_pokemon_box_card($data = array())
+{
+    include(__DIR__ . "/../partials/pokemon_box_card.php");
+}

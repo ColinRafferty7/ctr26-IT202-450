@@ -3,33 +3,34 @@ require(__DIR__ . "/../../partials/nav.php");
 if (is_logged_in(true)) {
     error_log("Session data: " . var_export($_SESSION, true));
 }
+
 $allowed_columns = ["name", "pokedex_id", "ability_1", "ability_2", "ability_3", "type_1", "type_2"];
 $sort = ["asc", "desc"];
 
 $params = [];
-$query = "SELECT id, name, pokedex_id, ability_1, ability_2, ability_3, type_1, type_2, is_api FROM `IT202-Pokemon`
-WHERE 1=1";// used for easy append of other clauses
+$query = "SELECT id, user_id, species_name, nickname, move_1, move_2, hp, attack, defense, sp_attack, sp_defense, speed, type_1, type_2, is_api FROM `IT202-User-Pokemon`
+WHERE user_id = :user_id";// used for easy append of other clauses
 
 if (!isset($_GET['column']) && !isset($_GET['order'])) {
-    header("Location: ?column=pokedex_id&order=asc");
+    header("Location: ?column=user_id&order=asc");
     exit;
 }
 
 
 if(count($_GET)> 0){
     $name = se($_GET, "name", "", false);
-    if(!empty($name)){
+    if(!empty($symbol)){
         $query .= " AND name like :name";
-        $params[":name"] = $name;
+        $params[":name"] = "%$name%";
     }
-    $pokedex_id = se($_GET, "pokedex_id", "", false);
-    if(!empty($pokedex_id)){
-        $query .= " AND pokedex_id >= :pokedex_id";
-        $params[":pokedex_id"] = $pokedex_id;
+    $type_1 = se($_GET, "type_1", "", false);
+    if(!empty($type_1)){
+        $query .= " AND type_1 >= :type_1";
+        $params[":type_1"] = $type_1;
     }
     $column = se($_GET, "column", "", false);
     if(empty($column) || !in_array($column, $allowed_columns)){
-        $column = "pokedex_id";
+        $column = "user_id";
     }
     $order = se($_GET, "order", "", false);
     if(empty($order) || !in_array($order, $sort)){
@@ -44,6 +45,11 @@ if(count($_GET)> 0){
         }   
         $query .= " LIMIT :limit";
         $params[":limit"] = $limit;
+    }
+    $user_id = get_user_id();
+    if(!empty($user_id))
+    {
+        $params[":user_id"] = $user_id;
     }
 }
 $db = getDB();
@@ -71,36 +77,6 @@ try {
     error_log("Error fetching stocks " . var_export($e, true));
     flash("Unhandled error occurred", "danger");
 }
-
-
-$params[":limit"] = 10000;
-$db = getDB();
-$stmt = $db->prepare($query);
-error_log("Query: " . $query);
-error_log("Params: " . var_export($params, true));
-foreach($params as $key=>$v){
-    // determine PDOPAram type
-    $type = match (true) {
-        is_numeric($v)   => PDO::PARAM_INT,
-        is_bool($v)  => PDO::PARAM_BOOL,
-        is_null($v)  => PDO::PARAM_NULL,
-        default          => PDO::PARAM_STR,
-    };
-    $stmt->bindValue("$key", $v,$type);
-}
-$nolimit = [];
-try {
-    $stmt->execute();
-    $r = $stmt->fetchAll();
-    if ($r) {
-        $nolimit = $r;
-    }
-} catch (PDOException $e) {
-    error_log("Error fetching pokemon " . var_export($e, true));
-    flash("Unhandled error occurred", "danger");
-}
-$totalresults = count($nolimit);
-
 // TODO filter/sort (last resort if brokers aren't added in this lesson)
 
 // form field for symbol
@@ -159,7 +135,7 @@ $form = [
 ]
 ?>
 <div class="container-fluid">
-    <h1>Pokedex</h1>
+    <h1>Your Pokemon</h1>
     <div>
         <form>
             <div class="row">
@@ -176,16 +152,18 @@ $form = [
             <a href="?" class="btn btn-secondary">Reset</a>
         </form>
     </div>  
-    <div class="d-flex justify-content-center">
-        <span class="badge text-bg-dark fs-3 px-3 py-2">Showing <?php echo(min($limit, count($results))); ?> of <?php echo($totalresults); ?></span>
+    <div class="card">
+        <div class="card-body">
+            This is some text within a card body.
+        </div>
     </div>
     <?php if (count($results) == 0) : ?>
         <p>No results to show</p>
     <?php else : ?>
         <div class="row">
-            <?php foreach ($results as $stock): ?>
+            <?php foreach ($results as $pokemon): ?>
                 <div class="col">
-                    <?php render_pokemon_card($stock); ?>
+                    <?php render_pokemon_box_card($pokemon); ?>
                 </div>
             <?php endforeach; ?>
         </div>

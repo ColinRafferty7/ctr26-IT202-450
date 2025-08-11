@@ -43,6 +43,9 @@ require(__DIR__ . "/../lib/functions.php");
                         <a class="nav-link" aria-current="page" href="<?php get_url('landing.php', true); ?>">Landing</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="<?php get_url('pokemon_box.php', true); ?>">Box</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="<?php get_url('pokedex.php', true); ?>">Pokedex</a>
                     </li>
                     <li class="nav-item">

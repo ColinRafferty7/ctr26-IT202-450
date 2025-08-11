@@ -6,41 +6,30 @@ if (is_logged_in(true)) {
 ?>
 
 <?php
-    function createPokemonById($name)
-    {
-        $id = se($_GET, "name", $name, false);
-        $pokemon = [];
-        $db = getDB();
-        $query = "SELECT id, name, pokedex_id, ability_1, ability_2, ability_3, type_1, type_2, is_api FROM `IT202-Pokemon` WHERE name = :name";
-        try {
-            $stmt = $db->prepare($query);
-            $stmt->execute([":name" => $name]);
-            $r = $stmt->fetch();
-            if ($r) {
-                $pokemon = $r;
-            }
-            return $pokemon;
-        } catch (PDOException $e) {
-            error_log("Error fetching record: " . var_export($e, true));
-            flash("Error fetching record", "danger");
-        }
+$team = [];
+$db = getDB();
+$query = "SELECT species_name FROM `IT202-User-Pokemon` WHERE user_id = :user_id";
+try {
+    $stmt = $db->prepare($query);
+    $stmt->execute([":user_id" => get_user_id()]);
+    $r = $stmt->fetchAll();
+    if ($r) {
+        $team = $r;
     }
+} catch (PDOException $e) {
+    error_log("Error fetching record: " . var_export($e, true));
+    flash("Error fetching record", "danger");
+}
 ?>
 
-<h1 style="text-align: center; color: var(--bs-warning);">Start Your Adventure</h1>
-<h3 style="text-align: center; color: var(--bs-light);">Which starter would you like?</h3>
-
+<h1 style="text-align: center; color: var(--bs-warning);">Your Team</h1>
 
 <div class="container text-center">
   <div class="row align-items-center">
-    <div class="col">
-      <?php render_pokemon_select_card(createPokemonById("Bulbasaur")) ?>
-    </div>
-    <div class="col">
-      <?php render_pokemon_select_card(createPokemonById("Charmander")) ?>
-    </div>
-    <div class="col">
-      <?php render_pokemon_select_card(createPokemonById("Squirtle")) ?>
-    </div>
+    <?php foreach($team as $member) : ?>
+        <div class="col">
+            <?php render_pokemon_select_card(createPokemonById(se($member, "species_name"))) ?>
+        </div>
+    <?php endforeach; ?>
   </div>
 </div>

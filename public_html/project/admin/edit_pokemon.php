@@ -10,7 +10,6 @@ if (!has_role("Admin")) {
 
 <?php
 $id = se($_GET, "id", -1, false);
-//TODO handle stock fetch
 if (isset($_POST["name"])) {
     foreach ($_POST as $k => $v) {
         if (!in_array($k, ["name", "pokedex_id", "ability_1", "ability_2", "ability_3", "moves", "hp", "attack", "defense", "sp_attack", "sp_defense", "speed", "type_1", "type_2"])) {
