@@ -1,51 +1,50 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
 ?>
-<h3>Register</h3>
-<!-- ctr26 07/10/2025 -->
-<!-- When the form is submitted, it uses the validate function from the js script to verify the email -->
-<form onsubmit="return validate(this)" method="POST">
-    <div>
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" required />
-    </div>
-    <div>
-        <label for="username">Username</label>
-        <input type="text" name="username" required maxlength="30" />
-    </div>
-    <div>
-        <label for="pw">Password</label>
-        <input type="password" id="pw" name="password" required minlength="8" />
-    </div>
-    <div>
-        <label for="confirm">Confirm</label>
-        <input type="password" name="confirm" required minlength="8" />
-    </div>
-    <input type="submit" value="Register" />
-</form>
+<div class="container-fluid">
+    <form onsubmit="return validate(this)" method="POST">
+        <div class="mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" type="email" name="email" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="username">Username</label>
+            <input class="form-control" type="text" name="username" required maxlength="30" />
+        </div class="mb-3">
+        <div class="mb-3">
+            <label class="form-label" for="pw">Password</label>
+            <input class="form-control" type="password" id="pw" name="password" required minlength="8" />
+        </div class="mb-3">
+        <div class="mb-3">
+            <label class="form-label" for="confirm">Confirm</label>
+            <input class="form-control" type="password" name="confirm" required minlength="8" />
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register" />
+    </form>
+</div>
 <script>
     function validate(form) {
-        //TODO 1: implement JavaScript validation (you'll do this on your own towards the end of Milestone1)
+        //TODO 1: implement JavaScript validation
         //ensure it returns false for an error and true for success
-let valid = true;
+        let valid = true;
         if (!is_valid_password(pw))
         {
-            flash("Password must be at least 8 characters", "warning");
+            flash("JS: Password must be at least 8 characters", "warning");
             valid = false;
         }
         if (!is_valid_email(email))
         {
-            flash("Please enter a valid email", "warning");
+            flash("JS: Please enter a valid email", "warning");
             valid = false;
         }
         if (!is_valid_username(username))
         {
-            flash("Please enter a valid username", "warning");
+            flash("JS: Please enter a valid username", "warning");
             valid = false;
         }
         if (!is_valid_confirm(pw, confirm))
         {
-            flash("Confirm does not match the entered password", "warning");
+            flash("JS: Confirm does not match the entered password", "warning");
             valid = false;
         }
 
@@ -54,66 +53,56 @@ let valid = true;
 </script>
 <?php
 //TODO 2: add PHP Code
-if (isset($_POST["email"], $_POST["password"], $_POST["confirm"], $_POST["username"])) {
-
+if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"]) && isset($_POST["username"])) {
     $email = se($_POST, "email", "", false);
     $password = se($_POST, "password", "", false);
     $confirm = se($_POST, "confirm", "", false);
     $username = se($_POST, "username", "", false);
-    // TODO 3: validate/use
+    //TODO 3
     $hasError = false;
-
     if (empty($email)) {
-        flash("Email must not be empty.", "danger");
+        flash("PHP: Email must not be empty", "danger");
         $hasError = true;
     }
-    // Sanitize and validate email
+    //sanitize
     $email = sanitize_email($email);
+    //validate
     if (!is_valid_email($email)) {
-        flash("Invalid email address.", "danger");
+        flash("PHP: Invalid email address", "danger");
         $hasError = true;
     }
     if (!is_valid_username($username)) {
-        flash("Username must be lowercase, alphanumerical, and can only contain _ or -", "danger");
+        flash("PHP: Username must only contain 3-16 characters a-z, 0-9, _, or -", "danger");
         $hasError = true;
     }
     if (empty($password)) {
-        flash("Password must not be empty.", "danger");
+        flash("PHP: password must not be empty", "danger");
         $hasError = true;
     }
-
     if (empty($confirm)) {
-        flash("Confirm password must not be empty.", "danger");
+        flash("PHP: Confirm password must not be empty", "danger");
         $hasError = true;
     }
-
     if (!is_valid_password($password)) {
-        flash("Password must be at least 8 characters long.", "danger");
+        flash("PHP: Password too short", "danger");
         $hasError = true;
     }
-
-    if (!is_valid_confirm($password, $confirm)) {
-        flash("Passwords must match.", "danger");
+    if (
+        strlen($password) > 0 && $password !== $confirm
+    ) {
+        flash("PHP: Passwords must match", "danger");
         $hasError = true;
     }
-
     if (!$hasError) {
-        // TODO 4: Hash password and store record in DB
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $db = getDB(); // available due to the `require()` of `functions.php`
-        // Code for inserting user data into the database
-        $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES (:email, :password, :username)");
+        //TODO 4
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $db = getDB();
+        $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
         try {
-            $stmt->execute([':email' => $email, ':password' => $hashed_password, ':username' => $username]);
-   
-            flash("Successfully registered! You can now log in.", "success");
-        } catch(PDOException $e) {
-            // Handle duplicate email/username
-            users_check_duplicate($e);
-        }
-        catch (Exception $e) {
-            flash("There was an error registering. Please try again.", "danger");
-            error_log("Registration Error: " . var_export($e, true)); // log the technical error for debugging
+            $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
+            flash("Successfully registered!", "success");
+        } catch (PDOException $e) {
+            users_check_duplicate($e->errorInfo);
         }
     }
 }
