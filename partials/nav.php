@@ -40,7 +40,10 @@ require(__DIR__ . "/../lib/functions.php");
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <?php if (is_logged_in()) : ?>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="<?php get_url('landing.php', true); ?>">Landing</a>
+                        <a class="nav-link" aria-current="page" href="<?php get_url('pokemon_box.php', true); ?>">Box</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="<?php get_url('pokedex.php', true); ?>">Pokedex</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="<?php get_url('profile.php', true); ?>">Profile</a>
@@ -60,14 +63,12 @@ require(__DIR__ . "/../lib/functions.php");
                             Roles
                         </a>
                         <ul class="dropdown-menu">
-
                             <li><a class="dropdown-item" aria-current="page" href="<?php get_url('admin/create_role.php', true); ?>">Create Role</a>
                             </li>
                             <li><a class="dropdown-item" aria-current="page" href="<?php get_url('admin/list_roles.php', true); ?>">List Roles</a>
                             </li>
                             <li><a class="dropdown-item" aria-current="page" href="<?php get_url('admin/assign_roles.php', true); ?>">Assign Roles</a>
                             </li>
-
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -80,6 +81,8 @@ require(__DIR__ . "/../lib/functions.php");
                             <li><a class="dropdown-item" aria-current="page" href="<?php get_url('admin/create_pokemon.php', true); ?>">Create Pokemon</a>
                             </li>
                             <li><a class="dropdown-item" aria-current="page" href="<?php get_url('admin/list_pokemon.php', true); ?>">List Pokemon</a>
+                            </li>
+                            <li><a class="dropdown-item" aria-current="page" href="<?php get_url('admin/assign_pokemon.php', true); ?>">Assign Pokemon</a>
                             </li>
                         </ul>
                     </li>

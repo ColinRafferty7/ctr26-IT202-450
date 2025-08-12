@@ -24,12 +24,12 @@ try {
     flash("Unhandled error occurred", "danger");
 }
 ?>
-<div class="container-fluid bg-secondary">
+<div class="container-fluid">
     <h3>List Pokemon</h3>
     <?php if (count($results) == 0) : ?>
     <p>No results to show</p>
 <?php else : ?>
-    <table class="table color-secondary">
+    <table class="table">
         <?php foreach ($results as $index => $record) : ?>
             <?php if ($index == 0) : ?>
                 <thead>
