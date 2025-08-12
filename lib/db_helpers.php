@@ -241,3 +241,23 @@ function update(
         throw $e;
     }
 }
+
+function createPokemonById($name)
+{
+    $id = se($_GET, "name", $name, false);
+    $pokemon = [];
+    $db = getDB();
+    $query = "SELECT id, name, pokedex_id, ability_1, ability_2, ability_3, type_1, type_2, is_api FROM `IT202-Pokemon` WHERE name = :name";
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute([":name" => $name]);
+        $r = $stmt->fetch();
+        if ($r) {
+            $pokemon = $r;
+        }
+        return $pokemon;
+    } catch (PDOException $e) {
+        error_log("Error fetching record: " . var_export($e, true));
+        flash("Error fetching record", "danger");
+    }
+}

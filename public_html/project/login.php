@@ -113,7 +113,7 @@ if (isset($_POST["email"], $_POST["password"])) {
                             //save roles or empty array
                             $_SESSION["user"]["roles"] = isset($roles) ? $roles : [];
 
-                            die(header("Location: landing.php"));
+                            die(header("Location: starter_selection.php"));
                         } else {
                             //echo "Invalid password<br>";
                             $ambigify = true; // ambiguous login attempt
