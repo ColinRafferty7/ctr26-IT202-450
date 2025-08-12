@@ -20,7 +20,7 @@ if(count($_GET)> 0){
     $name = se($_GET, "name", "", false);
     if(!empty($name)){
         $query .= " AND name like :name";
-        $params[":name"] = $name;
+        $params[":name"] = "%" . $name . "%";
     }
     $pokedex_id = se($_GET, "pokedex_id", "", false);
     if(!empty($pokedex_id)){
@@ -177,19 +177,19 @@ $form = [
         </form>
     </div>  
     <div class="d-flex justify-content-center">
-        <span class="badge text-bg-dark fs-3 px-3 py-2">Showing <?php echo(min($limit, count($results))); ?> of <?php echo($totalresults); ?></span>
+        <?php if(count($results) > 0): ?>
+            <span class="badge text-bg-dark fs-3 px-3 py-2">Showing <?php echo(min($limit, count($results))); ?> of <?php echo($totalresults); ?></span>
+        <?php else : ?>
+            <span class="badge text-bg-dark fs-3 px-3 py-2">No results found</span>
+        <?php endif; ?>
     </div>
-    <?php if (count($results) == 0) : ?>
-        <p>No results to show</p>
-    <?php else : ?>
-        <div class="row">
-            <?php foreach ($results as $stock): ?>
-                <div class="col">
-                    <?php render_pokemon_card($stock); ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
+    <div class="row">
+        <?php foreach ($results as $stock): ?>
+            <div class="col">
+                <?php render_pokemon_card($stock); ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>
 <?php
 require(__DIR__ . "/../../partials/flash.php");

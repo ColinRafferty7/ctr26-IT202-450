@@ -10,13 +10,10 @@ $sort = ["asc", "desc"];
 $params = [];
 $query = "SELECT id, user_id, species_name, nickname, move_1, move_2, hp, attack, defense, sp_attack, sp_defense, speed, type_1, type_2, is_api FROM `IT202-User-Pokemon`
 WHERE user_id = :user_id";// used for easy append of other clauses
-
 if (!isset($_GET['column']) && !isset($_GET['order'])) {
     header("Location: ?column=user_id&order=asc");
     exit;
 }
-
-
 if(count($_GET)> 0){
     $name = se($_GET, "name", "", false);
     if(!empty($symbol)){
@@ -152,11 +149,6 @@ $form = [
             <a href="?" class="btn btn-secondary">Reset</a>
         </form>
     </div>  
-    <div class="card">
-        <div class="card-body">
-            This is some text within a card body.
-        </div>
-    </div>
     <?php if (count($results) == 0) : ?>
         <p>No results to show</p>
     <?php else : ?>

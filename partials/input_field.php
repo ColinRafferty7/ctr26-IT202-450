@@ -71,7 +71,7 @@
         <?php endif; ?>
         <?php if ($_label) : ?>
             <?php /* label field */ ?>
-            <label class="form-label" for="<?php se($_id); ?>"><?php se($_label); ?></label>
+            <label class="form-label text-light" for="<?php se($_id); ?>"><?php se($_label); ?></label>
         <?php endif; ?>
 
         <?php if (!in_array($_type, $_non_standard_types)) : ?>
